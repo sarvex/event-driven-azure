@@ -1,0 +1,32 @@
+﻿@page
+@model CreateInvoiceModel
+@{
+}
+<form method="post">
+    <div class="card" >
+        <div class="card-body">
+            <h5 class="card-title">Create New Invoice</h5>
+
+            <label asp-for="ClientName"></label>
+            <input required class="form-control" asp-for="ClientName" />
+            <label asp-for="ClientEmail"></label>
+
+            <input required class="form-control" asp-for="ClientEmail" />
+            <label asp-for="Amount"></label>
+
+            <input required class="form-control" asp-for="Amount" />
+            <label asp-for="Date"></label>
+            <input required class="form-control" asp-for="Date" />
+            <label asp-for="InvoiceCode"></label>
+
+            <input required class="form-control" asp-for="InvoiceCode" />
+            <label asp-for="InvoiceDescription"></label>
+
+            <input  class="form-control" asp-for="InvoiceDescription" />
+            <div class="card-footer text-muted">
+                <button type="submit" class="btn btn-success">Create Invoice</button>
+            </div>
+
+        </div>
+    </div>
+</form>

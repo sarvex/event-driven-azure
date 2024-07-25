@@ -1,0 +1,42 @@
+﻿@page
+@model InvoicesModel
+@{
+    ViewData["Title"] = "Invoices";
+}
+
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+    <div class="col">  
+        <div class=" card shadow-lg rounded border text-white text-center bg-success d-inline-block invoice-card" >
+            <div class="card-body">
+                <h5 class="card-title">Create Invoice</h5>
+        <a  asp-page="/createinvoice" class="text-center text-white">
+            <i class="fa fa-file-invoice" style="font-size:90px" aria-hidden="true"></i>
+
+        </a>
+        </div>
+
+       
+
+    </div>
+    </div>
+
+    @foreach (var item in Model.Invoices)
+    { <div class="col">  
+        <div class=" card  shadow rounded border d-inline-block invoice-card" >
+            <div class="card-body">
+                <h5 class="card-title">@item.InvoiceCode</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@item.ClientName</h6>
+                <p class="card-text">@item.InvoiceDescription</p>
+                <a asp-page="/invoicedetails" class="card-link" asp-route-id="@item.Id">Details</a>
+            </div>
+        </div>
+        </div>
+
+    }
+</div>
+<style>
+    .invoice-card{
+        width:100%;
+    }
+</style>

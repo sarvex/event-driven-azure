@@ -1,0 +1,43 @@
+﻿@page
+@model InvoiceDetailsModel
+@{
+}
+@{
+    var imgFile = Model.Files.FirstOrDefault(f => f.Extension == ".png");
+}
+
+<div class="card">
+    <div class="card-header">
+        Invoice Details
+    </div>
+    <div class="row g-0">
+        <div class="col-md-4">
+            @if (imgFile != null)
+            {
+                <img class="img-fluid rounded-start" src="@Url.Page("/DownloadFile",new {fileName=imgFile.Name})"  alt="...">
+            }
+
+
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.InvoiceDetails.InvoiceCode</h5>
+                <p class="card-text">@Model.InvoiceDetails.InvoiceDescription</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Client Name </b> @Model.InvoiceDetails.ClientName</li>
+                <li class="list-group-item"><b>Client Email </b> @Model.InvoiceDetails.ClientEmail</li>
+
+                <li class="list-group-item"><b>Amount </b>$ @Model.InvoiceDetails.Amount </li>
+
+            </ul>
+            <div class="card-body">
+                @foreach (var file in Model.Files)
+                {
+                    <a asp-page="/DownloadFile" class="card-link" target="_blank" asp-route-fileName="@file.Name">@file.Extension</a>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

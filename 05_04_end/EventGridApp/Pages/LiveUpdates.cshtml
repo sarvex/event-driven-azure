@@ -1,0 +1,53 @@
+﻿@page
+@{
+    ViewData["Title"] = "Live Updates";
+}
+
+<h1>Live Messages</h1>
+<table class="table" id="messagesTable">
+    <thead>
+    <th>Event Type</th>
+    <th>Event Time</th>
+    <th>Full Message</th>
+
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+<script>
+        const apiBaseUrl = "https://invoiceapp.azurewebsites.net";
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl(apiBaseUrl + '/api')
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+            connection.on('newMessage', (message) => {
+           addRow(message);
+          });
+
+          connection.start()
+            .catch(console.error);
+
+    function addRow(message) {
+
+                var table = document.getElementById("messagesTable");
+
+                var rowCount = table.rows.length;
+                var row = table.insertRow(-1);
+
+                var cell1 = row.insertCell(0);
+                 cell1.innerHTML=message.EventType;
+
+                    var cell2 = row.insertCell(1);
+                cell2.innerHTML = message.EventTime
+
+                var cell3 = row.insertCell(2);
+                cell3.innerHTML = JSON.stringify(message)
+
+
+
+            }
+
+</script>
